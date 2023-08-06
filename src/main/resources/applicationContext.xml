@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+http://www.springframework.org/schema/beans/spring-beans.xsd
+http://www.springframework.org/schema/context
+http://www.springframework.org/schema/context/spring-context.xsd">
+
+    <context:property-placeholder location="classpath:aplication.properties"/>
+    <bean id="employee"
+          class="bekks.Employee">
+        <constructor-arg value="${employee.name}"/>
+        <constructor-arg value="${employee.surname}"/>
+    </bean>
+    <bean id="student"
+          class="bekks.Student">
+        <constructor-arg value="${student.name}"/>
+        <constructor-arg value="${student.surname}"/>
+    </bean>
+    <bean id="university"
+          class="bekks.University">
+<!--        <constructor-arg ref="employee"></constructor-arg>-->
+        <property name="nameable">
+            <list>
+                <ref bean="student"/>
+            </list>
+        </property>
+        <property name="name" value="${university.name}"/>
+        <property name="location" value="${university.location}"/>
+    </bean>
+
+</beans>
